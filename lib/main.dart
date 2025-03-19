@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'lang_service.dart'; 
 import 'package:get_storage/get_storage.dart';
 import 'homescreen.dart'; 
+import 'ALL Screen/login.dart'; 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,7 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(), 
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system, 
-      home: HomeScreen(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => HomeScreen()),
+        GetPage(name: '/login', page: () => LoginPage()),
+      ],
     );
   }
 }

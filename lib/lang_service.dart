@@ -6,12 +6,18 @@ class LangService extends Translations {
         'en': {
           'title': 'Hello',
           'change_lang': 'Eng',
-          'welcome':'Hello welcome to my app',
+          'welcome':'Hello welcome to Ed Tech',
+          'email': 'Email',
+          'password': 'Password',
+          'submit': 'Submit',
         },
         'km': {
           'title': 'សួស្តី',
           'change_lang': 'ខ្មែរ',
-          'welcome': 'សួស្តី សូមស្វាគមន៍មកកាន់កម្មវិធីរបស់ខ្ញុំ',
+          'welcome': 'សូមស្វាគមន៍មកកាន់សាលាអែតធិច',
+          'email': 'អ៊ីម៉ែល',
+          'password': 'ពាក្យសម្ងាត់',
+          'submit': 'បញ្ជូន',
         },
       };
 }

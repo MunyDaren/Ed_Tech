@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'All Screen/login.dart';
 import 'theme_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ThemeController themeController = Get.put(ThemeController());
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('title'.tr),
         actions: [
           PopupMenuButton<int>(
-            icon: Icon(Icons.more_vert), 
+            icon: Icon(Icons.more_vert),
             itemBuilder: (context) => [
               // change language option
               PopupMenuItem(
@@ -31,25 +31,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? Locale('km')
                         : Locale('en');
                     Get.updateLocale(locale);
-                    Navigator.pop(context); 
+                    Navigator.pop(context);
                   },
                 ),
               ),
-
-              // Dark Mode Toggle
               PopupMenuItem(
                 value: 2,
                 child: StatefulBuilder(
                   builder: (context, setState) => ListTile(
                     leading: Icon(themeController.isDarkMode
-                        ? Icons.dark_mode
-                        : Icons.light_mode),
-                    title: Text("Dark Mode"),
+                        ? Icons.light_mode
+                        : Icons.dark_mode),
+                    title: Text(themeController.isDarkMode
+                        ? "Dark Mode"
+                        : "Light Mode"),
                     trailing: Switch(
                       value: themeController.isDarkMode,
                       onChanged: (value) {
                         themeController.toggleTheme();
-                        setState(() {}); 
+                        setState(() {});
                       },
                     ),
                   ),
@@ -59,62 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text('welcome'.tr),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                    ),                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-decoration: InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                    ),                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      if (value.length < 6) {
-                        return 'Password must be at least 6 characters long';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        
-                      }
-                    },
-                    child: Text('Submit'),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: LoginPage(),
     );
   }
 }
